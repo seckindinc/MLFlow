@@ -1,0 +1,39 @@
+- MLflow Introduction
+
+    MLflow is an open source platform for managing the end-to-end machine learning lifecycle including experimentation, reproducibility, and deployment. It provides an API that allows you to work with any ML library or language and a web UI for visually comparing the results of experiments. 
+
+    Machine learning development requires solving new problems that are not part of the standard software devel- opment lifecycle. For example, while traditional software has a well-defined set of product features to be built, ML development tends to revolve around experimentation: the ML developer will constantly experiment with new datasets, models, software libraries, tuning parameters, etc. to optimize a business metric such as model accuracy. Because model performance depends heavily on the input data and training process, reproducibility is paramount throughout ML development. Finally, in order to have business impact, ML applications need to be deployed to production, which means both deploying a model in a way that can be used for inference (e.g., REST serving) and deploying scheduled jobs to regularly update the model. This is especially challenging when deployment requires collaboration with another team, such as application engineers who are not ML experts.
+
+- Challenges in Machine Learning Development
+
+    One of the main differences between software development and machine learning projects is that the goal in machine learning is to optimize a specific metric, such as prediction accuracy, instead of simply meeting a set of functional requirements. 
+    
+    Some of th challanges;
+    
+    - Multitude of tools: Hundreds of software tools cover each phase of ML development, from data preparation to model training to deployment. However, unlike traditional software development, where teams select one tool for each phase, ML developers usually want to try every available tool (e.g., algorithm) to see whether it improves results. For example, a team might try multiple preprocessing libraries (e.g., Pandas and Apache Spark) to featurize data; multiple model types (e.g. trees and deep learning); and even multiple frameworks for the same model type (e.g., TensorFlow and PyTorch) to run various models published online by researchers.
+    - Experiment tracking: Machine learning results are affected by dozens of configurable parameters, ranging from the input data to hyperparameters and preprocessing code. Whether an individual is working alone or on a team, it is difficult to track which parameters, code, and data went into each experiment to produce a model.
+    - Reproducibility: Without detailed tracking, teams often have trouble getting the same code to work again. For example, a data scientist passing her training code to an engineer for use in production might see problems if the engineer modifies it, and even a user working alone needs to reliably reproduce old results to stay productive.
+    - Production deployment: Moving an application to production can be challenging, both for inference and training. First, there are a plethora of possible inference environments, such as REST serving, batch scoring and mobile applications, but there is no standard way to move models from any library to these diverse environments. Second, the model training pipeline also needs to be reliably converted to a scheduled job, which requires care to reproduce the software environments, parameters, etc. used in development. Production deployment is especially challenging because it often requires passing the ML application to a different team with less ML expertise.
+
+- MLflow Overview
+
+    More specifically, MLflow provides three components, which can either be used together or separately: 
+     - MLflow Tracking, which is an API for recording experiment runs, including code used, parameters, input data, metrics, and arbitrary output files. These runs can then be queried through an API or UI.
+    - MLflow Projects, a simple format for packaging code into reusable projects. Each project defines its environment (e.g., software libraries required), the code to run, and parameters that can be used to call the project programmatically in a multi-step workflow or in automated tools such as hyperparameter tuners.
+    - MLflow Models, a generic format for packaging models (both the code and data required) that can work with diverse deployment tools (e.g., batch and real-time inference).
+
+- MLflow Tracking
+
+    MLflow Tracking is an API for logging and querying experiment runs, which consist of parameters, code ver- sions, metrics and arbitrary output files called artifacts. Users can start/end runs and log metrics, parameters and artifacts using simple API calls.
+    
+    Once users have recorded runs, MLflow allows users to query them through an API or web-based UI (Fig- ure 1). This UI includes the ability to organize runs into groups called Experiments, search and sort them, and compare groups of runs, enabling users to build a custom leaderboard for each of their ML problems and even compare results across teams.
+    
+- MLflow Projects
+
+    MLflow Projects provide a simple format for packaging reproducible data science code. Each project is simply a directory with code or a Git repository, and uses a descriptor file to specify its dependencies and how to run the code.
+    
+- MLflow Models
+
+    MLflow Models are a convention for packaging machine learning models in multiple formats called “flavors”, allowing diverse tools to understand the model at different levels of abstractions. MLflow also offers a variety of built-in tools to deploy models in its standard favors. For example, the same model can be deployed as a Docker container for REST serving, as an Apache Spark user-defined function (UDF) for batch inference, or into cloud-managed serving platforms like Amazon SageMaker and Azure ML.
+    
+    
